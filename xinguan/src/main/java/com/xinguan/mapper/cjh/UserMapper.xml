@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xinguan.mapper.cjh.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.xinguan.pojo.cjh.User" >
+    <constructor >
+      <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="age" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="email" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="version" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="deleted" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, age, email, version, deleted, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xinguan.pojo.cjh.User" >
+    insert into user (id, name, age, 
+      email, version, deleted, 
+      create_time, update_time)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
+      #{email,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, #{deleted,jdbcType=INTEGER}, 
+      #{create_time,jdbcType=TIMESTAMP}, #{update_time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xinguan.pojo.cjh.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="deleted != null" >
+        deleted,
+      </if>
+      <if test="create_time != null" >
+        create_time,
+      </if>
+      <if test="update_time != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="deleted != null" >
+        #{deleted,jdbcType=INTEGER},
+      </if>
+      <if test="create_time != null" >
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_time != null" >
+        #{update_time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xinguan.pojo.cjh.User" >
+    update user
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="deleted != null" >
+        deleted = #{deleted,jdbcType=INTEGER},
+      </if>
+      <if test="create_time != null" >
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_time != null" >
+        update_time = #{update_time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xinguan.pojo.cjh.User" >
+    update user
+    set name = #{name,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      email = #{email,jdbcType=VARCHAR},
+      version = #{version,jdbcType=INTEGER},
+      deleted = #{deleted,jdbcType=INTEGER},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      update_time = #{update_time,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="UserPager" resultType="com.xinguan.pojo.cjh.User">
+    select <include refid="Base_Column_List" /> from user
+  </select>
+
+</mapper>
